@@ -1,27 +1,22 @@
 package org.todo.todomvc.pageobjects;
 
+import net.serenitybdd.annotations.Step;
+import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 
-public class NewTodo {
+public class NewTodo extends PageObject {
 
     private final By NEW_TODO_INPUT_SELECTOR = By.cssSelector("#new-todo");
 
-    private WebDriver browser;
-
-    public NewTodo (WebDriver browser) {
-        this.browser = browser;
-    }
-
+    @Step("User enteres '{0}' as todo name into #NEW_TODO_INPUT_SELECTOR")
     public void enterTodoName(String name) {
-        var input = browser.findElement(NEW_TODO_INPUT_SELECTOR);
-        input.sendKeys(name);
+
+        find(NEW_TODO_INPUT_SELECTOR).type(name);
     }
 
+    @Step
     public void submitTodo() {
-        var input = browser.findElement(NEW_TODO_INPUT_SELECTOR);
-        input.sendKeys(Keys.ENTER);
+        find(NEW_TODO_INPUT_SELECTOR).sendKeys(Keys.ENTER);
     }
-
 }

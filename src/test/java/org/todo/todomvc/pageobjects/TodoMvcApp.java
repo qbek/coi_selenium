@@ -1,18 +1,14 @@
 package org.todo.todomvc.pageobjects;
 
-import org.openqa.selenium.WebDriver;
+import net.serenitybdd.annotations.Step;
+import net.serenitybdd.core.pages.PageObject;
 
-public class TodoMvcApp {
+public class TodoMvcApp extends PageObject {
 
     private final String TODOMVC_URL = "https://todomvc.com/examples/jquery/dist/#/all";
 
-    private WebDriver browser;
-
-    public TodoMvcApp(WebDriver browser) {
-        this.browser = browser;
-    }
-
+    @Step
     public void openMainView() {
-        browser.get(TODOMVC_URL);
+        openAt(TODOMVC_URL);
     }
 }

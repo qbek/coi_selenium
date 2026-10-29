@@ -1,33 +1,28 @@
 package org.todo.todomvc.pageobjects;
 
+import net.serenitybdd.annotations.Step;
+import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-public class TodosList {
-
-    WebDriver browser;
+public class TodosList extends PageObject {
 
     private final By TODO_LIST_SELECTOR = By.cssSelector("#todo-list");
     private final By TODO_COMPLETE_TOGGLE_SELECTOR = By.cssSelector(".toggle");
     private final By TODO_ELEMENT_SELECTOR = By.cssSelector("#todo-list li");
 
-    public TodosList(WebDriver browser) {
-        this.browser = browser;
-    }
-
+    @Step
     public String getAllTodosNames(){
-        var todosListEl = browser.findElement(TODO_LIST_SELECTOR);
-        return todosListEl.getText();
+        return find(TODO_LIST_SELECTOR).getText();
     }
 
+    @Step
     public void completeTodo() {
-        var completeToggle = browser.findElement(TODO_COMPLETE_TOGGLE_SELECTOR);
-        completeToggle.click();
+        find(TODO_COMPLETE_TOGGLE_SELECTOR).click();
     }
 
+    @Step
     public String getTodoElementClasses() {
-        var todo = browser.findElement(TODO_ELEMENT_SELECTOR);
-        return todo.getAttribute("class").strip();
+        return find(TODO_ELEMENT_SELECTOR).getDomAttribute("class").strip();
     }
 
 }
