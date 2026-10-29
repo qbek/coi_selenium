@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.todo.todomvc.pageobjects.NewTodo;
 import org.todo.todomvc.pageobjects.TodoFilters;
+import org.todo.todomvc.pageobjects.TodoMvcApp;
 import org.todo.todomvc.pageobjects.TodosList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -19,8 +20,7 @@ public class TodoCreationTests {
     NewTodo newTodo;
     TodosList todosList;
     TodoFilters todoFilters;
-
-    private final String TODOMVC_URL = "https://todomvc.com/examples/jquery/dist/#/all";
+    TodoMvcApp app;
 
     @BeforeEach
     public void setup() {
@@ -28,6 +28,7 @@ public class TodoCreationTests {
         newTodo = new NewTodo(browser);
         todosList = new TodosList(browser);
         todoFilters = new TodoFilters(browser);
+        app = new TodoMvcApp(browser);
     }
 
     @AfterEach
@@ -38,7 +39,7 @@ public class TodoCreationTests {
     @Test
     public void userCanCreateTodo() {
         var todoName = "Moje lepsze zadanie++";
-        browser.get(TODOMVC_URL);
+        app.openMainView();
         newTodo.enterTodoName(todoName);
         newTodo.submitTodo();
 
@@ -49,7 +50,7 @@ public class TodoCreationTests {
     @Test
     public void userCanCompleteTodo() {
         var todoName = "Umyć okna";
-        browser.get(TODOMVC_URL);
+        app.openMainView();
 
         newTodo.enterTodoName(todoName);
         newTodo.submitTodo();
@@ -64,7 +65,5 @@ public class TodoCreationTests {
 
         todoFilters.gotoCompleted();
         assertThat("Todo was created with correct name", todosList.getAllTodosNames(), equalTo(todoName));
-
     }
-
 }
