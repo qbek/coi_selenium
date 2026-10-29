@@ -1,34 +1,30 @@
 package org.todo.todomvc;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.junit.jupiter.api.Test;
 
-public class TodoCompletionTests {
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.emptyString;
+import static org.hamcrest.Matchers.equalTo;
 
-    WebDriver browser;
+public class TodoCompletionTests extends BaseTestSetup {
 
-    private final By NEW_TODO_INPUT_SELECTOR = By.cssSelector("#new-todo");
-    private final By TODO_LABEL_SELECTOR = By.cssSelector("#todo-list label");
-    private final By TODO_LIST_SELECTOR = By.cssSelector("#todo-list");
-    private final String TODOMVC_URL = "https://todomvc.com/examples/jquery/dist/#/all";
+    @Test
+    public void userCanCompleteTodo() {
+        var todoName = "Umyć okna";
+        app.openMainView();
 
-    private final By TODO_COMPLETE_TOGGLE_SELECTOR = By.cssSelector(".toggle");
-    private final By TODO_ELEMENT_SELECTOR = By.cssSelector("#todo-list li");
-    private final By ACTIVE_FILTER_SELECTOR = By.cssSelector("[href=\"#/active\"]");
-    private final By COMPLETED_FILTER_SELECTOR = By.cssSelector("[href=\"#/completed\"]");
+        newTodo.enterTodoName(todoName);
+        newTodo.submitTodo();
 
-    @BeforeEach
-    public void setup() {
-        browser = new FirefoxDriver();
+        todosList.completeTodo();
+
+        var todoClasses = todosList.getTodoElementClasses();
+        assertThat("Todo is marked as completed", todoClasses, equalTo("completed") );
+
+        todoFilters.gotoActive();
+        assertThat("Todo is not displayed", todosList.getAllTodosNames(), emptyString());
+
+        todoFilters.gotoCompleted();
+        assertThat("Todo was created with correct name", todosList.getAllTodosNames(), equalTo(todoName));
     }
-
-    @AfterEach
-    public void cleanup() {
-        browser.quit();
-    }
-
-
 }
