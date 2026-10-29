@@ -1,7 +1,9 @@
 package org.todo.todomvc;
 
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.todo.todomvc.pageobjects.NewTodo;
@@ -9,6 +11,7 @@ import org.todo.todomvc.pageobjects.TodoFilters;
 import org.todo.todomvc.pageobjects.TodoMvcApp;
 import org.todo.todomvc.pageobjects.TodosList;
 
+@ExtendWith(SerenityJUnit5Extension.class)
 public class BaseTestSetup {
 
     WebDriver browser;
