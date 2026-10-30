@@ -20,9 +20,31 @@ public class TodoCompletionTests extends BaseTestSetup {
 
         var todoClasses = todosList.getTodoElementClasses();
         assertThat("Todo is marked as completed", todoClasses, equalTo("completed") );
+    }
+
+    @Test
+    public void userCanFilterActiveTodos(){
+        var todoName = "Umyć okna";
+        app.openMainView();
+
+        newTodo.enterTodoName(todoName);
+        newTodo.submitTodo();
+
+        todosList.completeTodo();
 
         todoFilters.gotoActive();
         assertThat("Todo is not displayed", todosList.getAllTodosNames(), emptyString());
+    }
+
+    @Test
+    public void userCanFilterCompletedTodos() {
+        var todoName = "Umyć okna";
+        app.openMainView();
+
+        newTodo.enterTodoName(todoName);
+        newTodo.submitTodo();
+
+        todosList.completeTodo();
 
         todoFilters.gotoCompleted();
         assertThat("Todo was created with correct name", todosList.getAllTodosNames(), equalTo(todoName));
