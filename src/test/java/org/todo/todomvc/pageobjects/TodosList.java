@@ -35,4 +35,8 @@ public class TodosList extends PageObject {
     public void deleteTodo() {
         find(TODO_DELETE_SELECTOR).click();
     }
+
+    public boolean theOneExists(String todoName) {
+        return find(TODO_LIST_SELECTOR).containsText(todoName);
+    }
 }
