@@ -9,6 +9,9 @@ import org.todo.todomvc.pageobjects.NewTodo;
 import org.todo.todomvc.pageobjects.TodoFilters;
 import org.todo.todomvc.pageobjects.TodoMvcApp;
 import org.todo.todomvc.pageobjects.TodosList;
+import org.todo.todomvc.steps.Actions;
+import org.todo.todomvc.steps.Preconditions;
+import org.todo.todomvc.steps.Validations;
 
 @ExtendWith(SerenityJUnit5Extension.class)
 public class BaseTestSetup {
@@ -27,4 +30,13 @@ public class BaseTestSetup {
 
     @Steps
     TodoMvcApp app;
+
+    @Steps
+    Actions actions;
+
+    @Steps
+    Preconditions preconditions;
+
+    @Steps
+    Validations validations;
 }
