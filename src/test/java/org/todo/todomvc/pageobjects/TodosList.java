@@ -8,6 +8,7 @@ public class TodosList extends PageObject {
 
     private final By TODO_LIST_SELECTOR = By.cssSelector("#todo-list");
     private final By TODO_COMPLETE_TOGGLE_SELECTOR = By.cssSelector(".toggle");
+    private final By TODO_DELETE_SELECTOR = By.cssSelector(".destroy");
     private final By TODO_ELEMENT_SELECTOR = By.cssSelector("#todo-list li");
 
     @Step
@@ -25,4 +26,13 @@ public class TodosList extends PageObject {
         return find(TODO_ELEMENT_SELECTOR).getDomAttribute("class").strip();
     }
 
+    @Step
+    public void mouseOverTodo() {
+        find(TODO_ELEMENT_SELECTOR).click();
+    }
+
+    @Step
+    public void deleteTodo() {
+        find(TODO_DELETE_SELECTOR).click();
+    }
 }
