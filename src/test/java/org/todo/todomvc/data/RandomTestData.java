@@ -13,4 +13,9 @@ public class RandomTestData implements ITestData {
     public String getNewProjectName() {
         return "";
     }
+
+    @Override
+    public String getType() {
+        return "random";
+    }
 }

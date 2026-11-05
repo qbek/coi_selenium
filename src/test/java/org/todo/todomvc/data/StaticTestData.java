@@ -11,4 +11,9 @@ public class StaticTestData implements ITestData {
     public String getNewProjectName() {
         return "";
     }
+
+    @Override
+    public String getType() {
+        return "static";
+    }
 }

@@ -5,4 +5,6 @@ public interface ITestData {
     String getNewTodoName();
 
     String getNewProjectName();
+
+    String getType();
 }

@@ -1,11 +1,17 @@
 package org.todo.todomvc.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TestDataManager {
 
+    private List<ITestData> testDataGenerators = new ArrayList<>();
 
-    private ITestData randomData = new RandomTestData();
-    private ITestData staticData = new StaticTestData();
-
+    public TestDataManager() {
+        testDataGenerators.add(new RandomTestData());
+        testDataGenerators.add(new StaticTestData());
+        testDataGenerators.add(new OracleTestData());
+    }
 
     public String getTodoName() {
         var dataProvider = getInterface();
@@ -19,11 +25,10 @@ public class TestDataManager {
 
     private ITestData getInterface() {
         var dataType = System.getProperty("data", "");
-        switch( dataType) {
-            case "random":
-                return randomData;
-            case "static":
-                return staticData;
+        for (var generator : testDataGenerators) {
+            if (dataType.equals(generator.getType())) {
+                return generator;
+            }
         }
         throw new RuntimeException("Missing env data definitions");
     }
