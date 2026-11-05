@@ -5,6 +5,8 @@ import net.serenitybdd.annotations.Steps;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
+import org.todo.todomvc.data.RandomTestData;
+import org.todo.todomvc.data.StaticTestData;
 import org.todo.todomvc.pageobjects.NewTodo;
 import org.todo.todomvc.pageobjects.TodoFilters;
 import org.todo.todomvc.pageobjects.TodoMvcApp;
@@ -39,4 +41,10 @@ public class BaseTestSetup {
 
     @Steps
     Validations validations;
+
+    @Steps
+    StaticTestData staticData;
+
+    @Steps
+    RandomTestData randomData;
 }

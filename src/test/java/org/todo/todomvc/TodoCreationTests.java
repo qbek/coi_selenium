@@ -6,7 +6,8 @@ public class TodoCreationTests extends BaseTestSetup {
 
     @Test
     public void userCanCreateTodo() {
-        var todoName = "Moje lepsze zadanie++";
+//        var todoName = staticData.getTodoName();
+        var todoName = randomData.getRandomTodoName();
         preconditions.userHasAppReady();
         actions.userCreatesANewTodo(todoName);
         validations.userCheckTodoDisplayed(todoName);
