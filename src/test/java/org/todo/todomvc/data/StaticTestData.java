@@ -1,8 +1,14 @@
 package org.todo.todomvc.data;
 
-public class StaticTestData {
+public class StaticTestData implements ITestData {
 
-    public String getTodoName() {
+    @Override
+    public String getNewTodoName() {
         return "To jest statyczne todo name";
+    }
+
+    @Override
+    public String getNewProjectName() {
+        return "";
     }
 }

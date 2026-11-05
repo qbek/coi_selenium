@@ -2,9 +2,15 @@ package org.todo.todomvc.data;
 
 import com.github.javafaker.Faker;
 
-public class RandomTestData {
+public class RandomTestData implements ITestData {
 
-    public String getRandomTodoName() {
+    @Override
+    public String getNewTodoName() {
         return Faker.instance().chuckNorris().fact();
+    }
+
+    @Override
+    public String getNewProjectName() {
+        return "";
     }
 }
