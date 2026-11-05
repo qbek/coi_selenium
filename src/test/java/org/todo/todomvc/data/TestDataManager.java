@@ -12,7 +12,16 @@ public class TestDataManager {
 
 
     public String getTodoName() {
-        return randomData.getRandomTodoName();
+        var dataType = System.getProperty("data", "");
+        switch (dataType) {
+            case "random":
+                return randomData.getRandomTodoName();
+
+            case "static":
+                return staticData.getTodoName();
+        }
+
+        throw new RuntimeException("Missing env data definitions");
     }
 
 }
