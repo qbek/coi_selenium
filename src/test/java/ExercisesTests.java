@@ -108,4 +108,11 @@ public class ExercisesTests {
         assertThat("Link is correct", radioPageLink.getAttribute("href"), equalTo("https://www.radiozet.pl/"));
         assertThat("Link is visible", radioPageLink.isDisplayed(), equalTo(true));
     }
+
+    @Test
+    public void systemProperties() {
+        var x = System.getProperty("moja_dana");
+        System.out.println("UWAGA!!! UWAGA!!!");
+        System.out.println(x);
+    }
 }
