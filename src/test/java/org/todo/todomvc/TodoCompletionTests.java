@@ -31,4 +31,17 @@ public class TodoCompletionTests extends BaseTestSetup {
         actions.userFiltersCompletedTodos();
         validations.userCheckTodoDisplayed(todoName);
     }
+
+    @Test
+    public void userCanCompleteTheOne() {
+        var todosNames = testData.getFewTodosNames();
+        var theOne = "the ONE";
+        preconditions.userHasAppReady();
+        actions.userCreatesAFewTodos(todosNames);
+        actions.userCreatesANewTodo(theOne);
+        actions.userCreatesAFewTodos(todosNames);
+        actions.userCompletesTodoWithName(theOne);
+        validations.userChecksTodoCompleted(theOne);
+//        validations.userChecksThatOnlyOneTodoCompleted();
+    }
 }

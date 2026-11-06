@@ -13,6 +13,7 @@ public class TodosList extends PageObject {
     private final By TODO_COMPLETE_TOGGLE_SELECTOR = By.cssSelector(".toggle");
     private final By TODO_DELETE_SELECTOR = By.cssSelector(".destroy");
     private final By TODO_ELEMENT_SELECTOR = By.cssSelector("#todo-list li");
+    private final By COMPLETED_TODO = By.cssSelector("#todo-list .completed");
 
     @Step
     public List<String> getTodosNames() {
@@ -22,6 +23,12 @@ public class TodosList extends PageObject {
 //            var name = todo.getText().strip();
 //            todoNames.add(name);
 //        }
+//
+//        var todos = findAll(TODO_ELEMENT_SELECTOR);
+//        return todos.stream().map(todo ->
+//                {  return todo.getText().strip();} )
+//                .collect(Collectors.toList());
+
 
         var allTodos = find(TODO_LIST_SELECTOR).getText().split("\n");
         return Arrays.asList(allTodos);
@@ -33,8 +40,34 @@ public class TodosList extends PageObject {
     }
 
     @Step
+    public void completeTodo(String todoName) {
+        var allTodos = findAll(TODO_ELEMENT_SELECTOR);
+        var todoEl = allTodos.filter(todo -> {
+            return todo.getText().strip().equals(todoName);
+        }).getFirst();
+
+        todoEl.find(TODO_COMPLETE_TOGGLE_SELECTOR).click();
+    }
+
+    @Step
     public String getTodoElementClasses() {
         return find(TODO_ELEMENT_SELECTOR).getDomAttribute("class").strip();
+    }
+
+//    @Step
+//    public String getTodoElementClasses(String todoName) {
+//        var allTodos = findAll(TODO_ELEMENT_SELECTOR);
+//        var todoEl = allTodos.filter(todo -> {
+//            return todo.getText().strip().equals(todoName);
+//        }).getFirst();
+//        return todoEl.getDomAttribute("class").strip();
+//    }
+
+    @Step
+    public List<String> getAllCompletedTodos() {
+        var completedTodos = findAll(COMPLETED_TODO);
+        var completedNames = completedTodos.map(todo -> todo.getText().strip());
+        return completedNames;
     }
 
     @Step

@@ -52,4 +52,8 @@ public class Actions {
             userCreatesANewTodo(name);
         }
     }
+
+    public void userCompletesTodoWithName(String todoName) {
+        todosList.completeTodo(todoName);
+    }
 }

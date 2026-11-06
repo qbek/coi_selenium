@@ -32,6 +32,17 @@ public class Validations {
         assertThat("Todo is marked as completed", todoClasses, equalTo("completed") );
     }
 
+
+
+    public void userChecksTodoCompleted(String theOne) {
+//        var todoClasses = todosList.getTodoElementClasses(theOne);
+//        assertThat("Todo is marked as completed", todoClasses, equalTo("completed") );
+
+        var completedNames = todosList.getAllCompletedTodos();
+        assertThat("All required todos are marked as completed", completedNames, containsInAnyOrder(theOne));
+
+    }
+
     @Step
     public void userChecksEmptyTodosList() {
         assertThat("Todo is not displayed", todosList.getTodosNames(), hasSize(0));
