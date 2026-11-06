@@ -11,4 +11,12 @@ public class TodoCreationTests extends BaseTestSetup {
         actions.userCreatesANewTodo(todoName);
         validations.userCheckTodoDisplayed(todoName);
     }
+
+    @Test
+    public void userCanCreateMultipleTodos() {
+        var todosNames = testData.getFewTodosNames();
+        preconditions.userHasAppReady();
+        actions.userCreatesAFewTodos(todosNames);
+        validations.userChecksAllTodosDisplayed(todosNames);
+    }
 }

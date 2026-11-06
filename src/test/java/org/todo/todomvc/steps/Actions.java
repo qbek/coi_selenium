@@ -6,6 +6,8 @@ import org.todo.todomvc.pageobjects.NewTodo;
 import org.todo.todomvc.pageobjects.TodoFilters;
 import org.todo.todomvc.pageobjects.TodosList;
 
+import java.util.List;
+
 public class Actions {
 
     @Steps
@@ -42,5 +44,12 @@ public class Actions {
     @Step
     public void userFiltersCompletedTodos() {
         todoFilters.gotoCompleted();
+    }
+
+    @Step
+    public void userCreatesAFewTodos(List<String> todosNames) {
+        for (var name : todosNames) {
+            userCreatesANewTodo(name);
+        }
     }
 }

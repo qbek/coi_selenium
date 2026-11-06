@@ -4,6 +4,8 @@ import net.serenitybdd.annotations.Step;
 import net.serenitybdd.annotations.Steps;
 import org.todo.todomvc.pageobjects.TodosList;
 
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.emptyString;
 import static org.hamcrest.Matchers.equalTo;
@@ -33,5 +35,9 @@ public class Validations {
     @Step
     public void userChecksEmptyTodosList() {
         assertThat("Todo is not displayed", todosList.getAllTodosNames(), emptyString());
+    }
+
+    public void userChecksAllTodosDisplayed(List<String> todosNames) {
+        assertThat("All todos are listed", todosList.getTodosNames(), equalTo(todosNames));
     }
 }

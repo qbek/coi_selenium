@@ -25,11 +25,16 @@ public class TestDataManager {
 
     private ITestData getInterface() {
         var dataType = System.getProperty("data", "");
-        for (var generator : testDataGenerators) {
+        for (ITestData generator : testDataGenerators) {
             if (dataType.equals(generator.getType())) {
                 return generator;
             }
         }
         throw new RuntimeException("Missing env data definitions");
+    }
+
+    public List<String> getFewTodosNames() {
+        var dataType = getInterface();
+        return dataType.getNewTodosNames();
     }
 }
