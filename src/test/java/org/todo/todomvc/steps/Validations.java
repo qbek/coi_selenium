@@ -4,11 +4,11 @@ import net.serenitybdd.annotations.Step;
 import net.serenitybdd.annotations.Steps;
 import org.todo.todomvc.pageobjects.TodosList;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.emptyString;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 
 public class Validations {
 
@@ -17,8 +17,8 @@ public class Validations {
 
     @Step
     public void userCheckTodoDisplayed(String todoName) {
-        var todosNames = todosList.getAllTodosNames();
-        assertThat("Todo was created with correct name", todosNames, equalTo(todoName));
+        var toList = Arrays.asList(todoName);
+        userChecksAllTodosDisplayed(toList);
     }
 
     @Step
@@ -34,9 +34,10 @@ public class Validations {
 
     @Step
     public void userChecksEmptyTodosList() {
-        assertThat("Todo is not displayed", todosList.getAllTodosNames(), emptyString());
+        assertThat("Todo is not displayed", todosList.getTodosNames(), hasSize(0));
     }
 
+    @Step
     public void userChecksAllTodosDisplayed(List<String> todosNames) {
         assertThat("All todos are listed", todosList.getTodosNames(), equalTo(todosNames));
     }

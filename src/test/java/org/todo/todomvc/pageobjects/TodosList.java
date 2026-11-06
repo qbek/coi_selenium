@@ -4,7 +4,7 @@ import net.serenitybdd.annotations.Step;
 import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.By;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TodosList extends PageObject {
@@ -15,19 +15,16 @@ public class TodosList extends PageObject {
     private final By TODO_ELEMENT_SELECTOR = By.cssSelector("#todo-list li");
 
     @Step
-    public String getAllTodosNames(){
-        return find(TODO_LIST_SELECTOR).getText();
-    }
-
-    @Step
     public List<String> getTodosNames() {
-        var todoNames = new ArrayList<String>();
-        var todos = findAll(TODO_ELEMENT_SELECTOR);
-        for(var todo : todos) {
-            var name = todo.getText().strip();
-            todoNames.add(name);
-        }
-        return todoNames;
+//        var todoNames = new ArrayList<String>();
+//        var todos = findAll(TODO_ELEMENT_SELECTOR);
+//        for(var todo : todos) {
+//            var name = todo.getText().strip();
+//            todoNames.add(name);
+//        }
+
+        var allTodos = find(TODO_LIST_SELECTOR).getText().split("\n");
+        return Arrays.asList(allTodos);
     }
 
     @Step
